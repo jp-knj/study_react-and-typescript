@@ -1,35 +1,12 @@
 import * as React from 'react';
-import { questions } from './questions';
 
-type QuestionProps = {
-  question: string;
-  answer: string;
-};
+import { CharacterType, fetchCharacter } from './characters';
 
-const Question = ({ question, answer }: QuestionProps) => {
-  const [isHidden, toggleHidden] = React.useState<boolean>(true);
-
-  return (
-    <article className="question">
-      <header>{question}</header>
-      <p className="answer">
-        <span className={`${isHidden ? 'blurred': 'visible'}`}>{answer}</span>
-      </p>
-      <footer>
-        <button onClick={() => isHidden?  toggleHidden(false): toggleHidden(true)}>Toggle Answer</button>
-      </footer>
-    </article>
-  );
-};
+import { Loading } from './Loading';
+import { CharacterInformation } from './CharacterInformation';
 
 const Application = () => {
-  return (
-    <main>
-      {questions.map((q) => (
-        <Question question={q.question} answer={q.answer} key={q.id} />
-      ))}
-    </main>
-  );
+  return <main></main>;
 };
 
 export default Application;
