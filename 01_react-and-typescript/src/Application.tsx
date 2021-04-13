@@ -1,23 +1,36 @@
-type NameTagProps = {
-  name: string;
-  greeting?: string;
-};
+import * as React from 'react'
 
-const NameTag = ({ name, greeting = 'Hello' }: NameTagProps) => {
+/**
+ * Things you could try:
+ *
+ * JSX.Element;
+ * JSX.Element | JSX.Element[];
+ * React.ReactNode;
+ * React.ReactChildren;
+ * React.ReactChild[];
+ */
+
+
+const Box = ({ children }: BoxProps) => {
   return (
-    <main>
-      <header>
-        <h1>{greeting}</h1>
-        <p>My Name Is</p>
-      </header>
-      <section className="display-name">
-        <p>{name}</p>
-      </section>
-      <footer />
-    </main>
+    <section style={{ padding: "1em", border: "5px solid purple" }}>
+      {children}
+    </section>
   );
 };
 
-const Application = () => <NameTag name="kenji" greeting="Salutations" />;
-
-export default Application;
+export default function Application() {
+  return (
+    <Box>
+      Just a string.
+      <p>Some HTML that is not nested.</p>
+      <Box>
+        <h2>Another React component with one child.</h2>
+      </Box>
+      <Box>
+        <h2>A nested React component with two children.</h2>
+        <p>The second child.</p>
+      </Box>
+    </Box>
+  );
+}
