@@ -1,40 +1,35 @@
-import * as React from 'react'
+import * as React from 'react';
+import { questions } from './questions';
 
-/**
- * Things you could try:
- *
- * JSX.Element;
- * JSX.Element | JSX.Element[];
- * React.ReactNode;
- * React.ReactChildren;
- * React.ReactChild[];
- */
-
-type BoxProps = {
-  children: React.ReactChild | React.ReactChild[],
-  style?: React.CSSProperties
+type QuestionProps = {
+  question: string;
+  answer: string;
 };
 
-const Box = ({ children, style = {} }: BoxProps) => {
+const Question = ({ question, answer }: QuestionProps) => {
+  const [isHidden, toggleHidden] = React.useState<boolean>(true);
+
   return (
-    <section style={{ padding: "1em", border: "5px solid purple", ...style }}>
-      {children}
-    </section>
+    <article className="question">
+      <header>{question}</header>
+      <p className="answer">
+        <span className={`${isHidden ? 'blurred': 'visible'}`}>{answer}</span>
+      </p>
+      <footer>
+        <button onClick={() => isHidden?  toggleHidden(false): toggleHidden(true)}>Toggle Answer</button>
+      </footer>
+    </article>
   );
 };
 
-export default function Application() {
+const Application = () => {
   return (
-    <Box>
-      Just a string.
-      <p>Some HTML that is not nested.</p>
-      <Box style={{ borderColor: "red"}}>
-        <h2>Another React component with one child.</h2>
-      </Box>
-      <Box>
-        <h2>A nested React component with two children.</h2>
-        <p>The second child.</p>
-      </Box>
-    </Box>
+    <main>
+      {questions.map((q) => (
+        <Question question={q.question} answer={q.answer} key={q.id} />
+      ))}
+    </main>
   );
-}
+};
+
+export default Application;
